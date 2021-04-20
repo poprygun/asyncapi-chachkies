@@ -10,27 +10,28 @@ info:
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
   development:
-    url: broker.mycompany.com
+    url: broker.microsamples.com
     protocol: amqp
 channels:
   user/signedup:
     publish:
-      summary: Inform about environmental lighting conditions for a particular streetlight.
-      operationId: onUserSignedUp
+      operationId: onSignUp
       message:
-        name: SignedUpMessage
-        payload:
-          type: object
-          properties:
-            id:
-              type: integer
-              minimum: 0
-              description: Id of the streetlight.
-            lumens:
-              type: integer
-              minimum: 0
-              description: Light intensity measured in lumens.
-            sentAt:
-              type: string
-              format: date-time
-              description: Date and time when the message was sent.
+        $ref: '#/components/messages/signUp'
+components:
+  messages:
+    signUp:
+      name: signUp
+      payload:
+        $ref: '#/components/schemas/signUpPayload'
+  schemas:
+    signUpPayload:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: Name of the user
+        email:
+          type: string
+          format: email
+          description: Email of the user
