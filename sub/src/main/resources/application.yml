@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    function:
+      definition: signUp
+    stream:
+      bindings:
+        signUp-out-0:
+          destination: user/signedup
+logging:
+  level:
+    root: info
+    org:
+      springframework: info
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

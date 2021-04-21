@@ -8,13 +8,29 @@ channels:
     subscribe:
       operationId: signUp
       message:
-        $ref: '#/components/messages/signUp'
+        $ref: '#/components/messages/UserSignedUp'
 components:
   messages:
-    signUp:
-      name: signUp
+    UserSignedUp:
       payload:
-        $ref: '#/components/schemas/signUpPayload'
+        type: object
+        properties:
+          displayName:
+            type: string
+            description: Name of the user
+          email:
+            type: string
+            format: email
+            description: Email of the user
+        examples:
+          - laurent:
+              summary: Example user one
+              payload: |-
+                {"name": "Laurent", "email": "laurent@hotmail.com"}
+          - lenin:
+              summary: Example user two
+              payload: |-
+                {"name": "Lenin", "email": "lenin@hotmail.com"} 
   schemas:
     signUpPayload:
       type: object
